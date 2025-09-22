@@ -4,6 +4,8 @@
  */
 package view;
 
+import tools.Util;
+
 
 
 /**
@@ -20,6 +22,8 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Produtos");
         setLocationRelativeTo(null);
+        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+
     }
 
     /**
@@ -253,6 +257,9 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jChbApc_AtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChbApc_AtivoActionPerformed
@@ -261,6 +268,10 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -270,16 +281,25 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
 
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
+        JDlgApc_ProdutosPesquisar jDlgApc_ProdutosPesquisar = new JDlgApc_ProdutosPesquisar(null, true);
+        jDlgApc_ProdutosPesquisar.setTelaPai(this);
+        jDlgApc_ProdutosPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jTxtApc_FabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApc_FabricanteActionPerformed
