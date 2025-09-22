@@ -4,6 +4,8 @@
  */
 package view;
 
+import tools.Util;
+
 /**
  *
  * @author u09947038130
@@ -18,6 +20,7 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Clientes");
         setLocationRelativeTo(null);
+        Util.habilitar(false, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }
 
     /**
@@ -359,6 +362,8 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(true, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jFmtApc_CpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtApc_CpfActionPerformed
@@ -379,24 +384,38 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(true, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
+        Util.perguntar("Deseja excluir o registro?");
 
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(false, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo);
+
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(false, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo);
 
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
+        JDlgApc_ClientesPesquisar jDlgApc_ClientesPesquisar = new JDlgApc_ClientesPesquisar(null, true);
+        jDlgApc_ClientesPesquisar.setTelaPai(this);
+        jDlgApc_ClientesPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jCboApc_SexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboApc_SexoActionPerformed
