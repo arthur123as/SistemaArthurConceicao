@@ -4,11 +4,6 @@
  */
 package view;
 
-import bean.Apc_Produtos;
-import dao.Apc_ProdutosDao;
-import dao.Apc_UsuariosDao;
-import java.util.List;
-
 /**
  *
  * @author u09947038130
@@ -16,7 +11,6 @@ import java.util.List;
 public class JDlgApc_ProdutosPesquisar extends javax.swing.JDialog {
 
     JDlgApc_Produtos jDlgApc_Produtos;
-    Apc_ControllerProdutos apc_ControllerProdutos;
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
@@ -25,11 +19,6 @@ public class JDlgApc_ProdutosPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Produtos");
-        Apc_ProdutosDao apc_produtosDao = new Apc_ProdutosDao();
-        List lista = (List) apc_produtosDao.listAll();
-        apc_ControllerProdutos = new Apc_ControllerProdutos();
-        apc_ControllerProdutos.setList(lista);
-        jTable1.setModel(apc_ControllerProdutos);
     }
 
     public void setTelaPai(JDlgApc_Produtos jDlgApc_Produtos) {
@@ -103,8 +92,6 @@ public class JDlgApc_ProdutosPesquisar extends javax.swing.JDialog {
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
         int linSel = jTable1.getSelectedRow();
-        Apc_Produtos apc_produtos = (Apc_Produtos) apc_ControllerProdutos.getBean(linSel);
-        jDlgApc_Produtos.beanView(apc_produtos);
         setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
