@@ -4,6 +4,7 @@
  */
 package view;
 
+
 /**
  *
  * @author u09947038130
@@ -19,6 +20,11 @@ public class JDlgApc_VendedorPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Vendedor");
+
+    }
+
+    public void setTelaPai(JDlgApc_Vendedor jDlgApc_Vendedor) {
+        this.jDlgApc_Vendedor = jDlgApc_Vendedor;
     }
     /**
      * This method is called from within the constructor to initialize the form.
