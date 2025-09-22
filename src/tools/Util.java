@@ -60,6 +60,7 @@ public class Util {
     public static int strToInt(String cad) {
         return Integer.valueOf(cad);
         }
+    
     public static String intToStr(int num) {
         return String.valueOf(num);
     }
