@@ -4,6 +4,8 @@
  */
 package view;
 
+import tools.Util;
+
 /**
  *
  * @author u09947038130
@@ -19,6 +21,7 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
+        Util.habilitar(false, jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha,jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }
    
     /**
@@ -261,6 +264,9 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(true, jTxtApc_Apelido,jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jPwfApc_SenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPwfApc_SenhaActionPerformed
@@ -289,23 +295,38 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(true, jTxtApc_Apelido,jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
 
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
+        Util.perguntar("Deseja excluir o registro?");
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+       Util.habilitar(false, jTxtApc_Apelido, jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
+        Util.habilitar(false, jTxtApc_Apelido,jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtApc_Apelido, jTxtApc_Nome, jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
+        JDlgApc_UsuariosPesquisar jDlgApc_UsuariosPesquisar = new JDlgApc_UsuariosPesquisar(null, true);
+        jDlgApc_UsuariosPesquisar.setTelaPai(this);
+        jDlgApc_UsuariosPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**
