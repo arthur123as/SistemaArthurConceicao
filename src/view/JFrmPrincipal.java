@@ -170,8 +170,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMnuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendasActionPerformed
         // TODO add your handling code here:
-        JDlgApc_Vendas jDlgVendas = new JDlgApc_Vendas(this, true);
-        jDlgVendas.setVisible(true);
+
     }//GEN-LAST:event_jMnuVendasActionPerformed
 
     /**
@@ -201,12 +200,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            JDlgApc_Login login = new JDlgApc_Login(null, true); // true = modal
-            login.setVisible(true);            }
-        });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
