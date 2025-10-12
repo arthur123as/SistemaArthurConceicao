@@ -12,6 +12,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 
 /**
  *
@@ -58,23 +61,37 @@ public class Util {
     }
 
     public static int strToInt(String cad) {
-        return Integer.valueOf(cad);
-        }
+        if (cad == null || cad.isEmpty()) return 0;
+        return Integer.parseInt(cad);
+    }
     
     public static String intToStr(int num) {
         return String.valueOf(num);
     }
+
     public static double strToDouble(String cad){
-    return 0;
+        if (cad == null || cad.isEmpty()) return 0.0;
+        return Double.parseDouble(cad);
     }
+
     public static String doubleToStr(double num){
-    return "";
+        return String.valueOf(num);
     }
+
     public static Date strToDate(String cad){
-    return null;
+        try {
+            if (cad == null || cad.isEmpty()) return null; 
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            return formato.parse(cad);
+        } catch (ParseException e) {
+            return null;
+        }
     }
+
     public static String dateToStr(Date data){
-    return "";
+        if (data == null) return "";
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(data);
     }
 }
     
