@@ -64,7 +64,7 @@ public class Util {
     public static String intToStr(int num) {
         return String.valueOf(num);
     }
-    public static double strToDuble(String cad){
+    public static double strToDouble(String cad){
     return 0;
     }
     public static String doubleToStr(double num){

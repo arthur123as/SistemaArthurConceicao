@@ -4,6 +4,7 @@
  */
 package view;
 
+import dao.DAO_ApcUsuarios;
 import tools.Util;
 
 /**
@@ -298,7 +299,7 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
         Util.habilitar(true, jTxtApc_Apelido,jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
-
+        
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -311,7 +312,8 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
        Util.habilitar(false, jTxtApc_Apelido, jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
-
+        DAO_ApcUsuarios dao_ApcUsuarios = new DAO_ApcUsuarios();
+        dao_ApcUsuarios.insert(viewBean);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
