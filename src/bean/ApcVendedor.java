@@ -3,13 +3,10 @@ package bean;
 
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +32,7 @@ public class ApcVendedor  implements java.io.Serializable {
      private String apcCidade;
      private String apcCelular;
      private String apcTelefoneResidencial;
-     private String apcCargo;
+     private int apcCargo;
      private double apcSalario;
      private Date apcDataAdimissao;
      private String apcAtivo;
@@ -44,7 +41,7 @@ public class ApcVendedor  implements java.io.Serializable {
     }
 
 	
-    public ApcVendedor(int apcIdVendedor, String apcNome, String apcCpf, String apcSexo, String apcCep, String apcEndereco, String apcBairro, String apcCidade, String apcCelular, String apcCargo, double apcSalario, String apcAtivo) {
+    public ApcVendedor(int apcIdVendedor, String apcNome, String apcCpf, String apcSexo, String apcCep, String apcEndereco, String apcBairro, String apcCidade, String apcCelular, int apcCargo, double apcSalario, String apcAtivo) {
         this.apcIdVendedor = apcIdVendedor;
         this.apcNome = apcNome;
         this.apcCpf = apcCpf;
@@ -58,7 +55,7 @@ public class ApcVendedor  implements java.io.Serializable {
         this.apcSalario = apcSalario;
         this.apcAtivo = apcAtivo;
     }
-    public ApcVendedor(int apcIdVendedor, String apcNome, String apcCpf, Date apcDataNascimento, String apcSexo, String apcCep, String apcEndereco, String apcBairro, String apcCidade, String apcCelular, String apcTelefoneResidencial, String apcCargo, double apcSalario, Date apcDataAdimissao, String apcAtivo, Set apcVendases) {
+    public ApcVendedor(int apcIdVendedor, String apcNome, String apcCpf, Date apcDataNascimento, String apcSexo, String apcCep, String apcEndereco, String apcBairro, String apcCidade, String apcCelular, String apcTelefoneResidencial, int apcCargo, double apcSalario, Date apcDataAdimissao, String apcAtivo, Set apcVendases) {
        this.apcIdVendedor = apcIdVendedor;
        this.apcNome = apcNome;
        this.apcCpf = apcCpf;
@@ -190,11 +187,11 @@ public class ApcVendedor  implements java.io.Serializable {
 
     
     @Column(name="apc_cargo", nullable=false, length=30)
-    public String getApcCargo() {
+    public int getApcCargo() {
         return this.apcCargo;
     }
     
-    public void setApcCargo(String apcCargo) {
+    public void setApcCargo(int apcCargo) {
         this.apcCargo = apcCargo;
     }
 

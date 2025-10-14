@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.ApcProdutos;
+import dao.DAO_ApcProdutos;
 import tools.Util;
 
 
@@ -17,6 +19,10 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuarios
      */
+    
+    boolean alterar = false;
+    boolean foiPesquisado = false;
+    
     public JDlgApc_Produtos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -25,7 +31,31 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
 
     }
+    
+    public ApcProdutos viewBean() {
+        ApcProdutos produtos = new ApcProdutos();
+        produtos.setApcIdProdutos(Util.strToInt(jTxtApc_Codigo.getText()));
+        produtos.setApcNome(jTxtApc_Nome.getText());
+        produtos.setApcDescricao(jTxtApc_Descricao.getText());
+        produtos.setApcFabricante(jTxtApc_Fabricante.getText());
+        produtos.setApcPreco(Util.strToDouble(jTxtApc_Preco.getText()));
+        produtos.setApcCategoria(jCboApc_Categoria.getSelectedIndex());
+        produtos.setApcDataCadastro(Util.strToDate(jFmtApc_DataCadastro.getText()));
+        produtos.setApcAtivo(jChbApc_Ativo.isSelected() ? "S" : "N");
 
+        return produtos;
+    }
+
+    public void beanView(ApcProdutos produtos) {
+        jTxtApc_Codigo.setText(Util.intToStr(produtos.getApcIdProdutos()));
+        jTxtApc_Nome.setText(produtos.getApcNome());
+        jTxtApc_Descricao.setText(produtos.getApcDescricao());
+        jTxtApc_Fabricante.setText(produtos.getApcFabricante());
+        jTxtApc_Preco.setText(Util.doubleToStr(produtos.getApcPreco()));
+        jCboApc_Categoria.setSelectedIndex(produtos.getApcCategoria());
+        jFmtApc_DataCadastro.setText(Util.dateToStr(produtos.getApcDataCadastro()));
+        jChbApc_Ativo.setSelected(produtos.getApcAtivo().equals("S"));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -160,15 +190,6 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
                         .addComponent(jTxtApc_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTxtApc_Nome))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLblCodigo)
-                        .addGap(69, 69, 69)
-                        .addComponent(jLblCodigo1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTxtApc_Preco)
@@ -207,7 +228,19 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
                                                 .addGap(0, 0, Short.MAX_VALUE))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLblCodigo)
+                                .addGap(69, 69, 69)
+                                .addComponent(jLblCodigo1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(226, 226, 226)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -257,8 +290,15 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+
+        if (!foiPesquisado) {
+            Util.mensagem("Você deve pesquisar primeiro!");
+            return;
+        } else {
+            alterar = true;
+            Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        }
 
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -271,18 +311,35 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
-
+        jTxtApc_Codigo.grabFocus();
+        alterar = false;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        Util.perguntar("Deseja excluir o registro?");
+        if (!foiPesquisado) {
+            Util.mensagem("Você deve pesquisar primeiro!");
+            return;
+        } else {
+            if (Util.perguntar("Deseja realmente Excluir?") == true) {
+                DAO_ApcProdutos produtosDAO = new DAO_ApcProdutos();
+                produtosDAO.delete(viewBean());
+            }
+        }
+        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        DAO_ApcProdutos dao_ApcProdutos = new DAO_ApcProdutos();
+        
+        if (alterar == false){
+            dao_ApcProdutos.insert(viewBean());
+        } else{
+            dao_ApcProdutos.update(viewBean());
+        }
         Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
@@ -300,6 +357,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         JDlgApc_ProdutosPesquisar jDlgApc_ProdutosPesquisar = new JDlgApc_ProdutosPesquisar(null, true);
         jDlgApc_ProdutosPesquisar.setTelaPai(this);
         jDlgApc_ProdutosPesquisar.setVisible(true);
+        foiPesquisado = true;
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jTxtApc_FabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApc_FabricanteActionPerformed

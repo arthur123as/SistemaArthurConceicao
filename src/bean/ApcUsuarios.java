@@ -26,14 +26,14 @@ public class ApcUsuarios  implements java.io.Serializable {
      private String apcCpf;
      private Date apcDataNascimento;
      private String apcSenha;
-     private String apcNivel;
+     private int apcNivel;
      private String apcAtivo;
 
     public ApcUsuarios() {
     }
 
 	
-    public ApcUsuarios(int apcIdUsuarios, String apcNome, String apcApelido, String apcCpf, String apcSenha, String apcNivel, String apcAtivo) {
+    public ApcUsuarios(int apcIdUsuarios, String apcNome, String apcApelido, String apcCpf, String apcSenha, int apcNivel, String apcAtivo) {
         this.apcIdUsuarios = apcIdUsuarios;
         this.apcNome = apcNome;
         this.apcApelido = apcApelido;
@@ -42,7 +42,7 @@ public class ApcUsuarios  implements java.io.Serializable {
         this.apcNivel = apcNivel;
         this.apcAtivo = apcAtivo;
     }
-    public ApcUsuarios(int apcIdUsuarios, String apcNome, String apcApelido, String apcCpf, Date apcDataNascimento, String apcSenha, String apcNivel, String apcAtivo) {
+    public ApcUsuarios(int apcIdUsuarios, String apcNome, String apcApelido, String apcCpf, Date apcDataNascimento, String apcSenha, int apcNivel, String apcAtivo) {
        this.apcIdUsuarios = apcIdUsuarios;
        this.apcNome = apcNome;
        this.apcApelido = apcApelido;
@@ -117,11 +117,11 @@ public class ApcUsuarios  implements java.io.Serializable {
 
     
     @Column(name="apc_nivel", nullable=false, length=15)
-    public String getApcNivel() {
+    public int getApcNivel() {
         return this.apcNivel;
     }
     
-    public void setApcNivel(String apcNivel) {
+    public void setApcNivel(int apcNivel) {
         this.apcNivel = apcNivel;
     }
 

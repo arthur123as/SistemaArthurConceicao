@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package view;
+
+import java.util.List;
+import dao.DAO_ApcUsuarios;
+import bean.ApcUsuarios;
+
 /**
  *
  * @author u09947038130
@@ -10,6 +15,7 @@ package view;
 public class JDlgApc_UsuariosPesquisar extends javax.swing.JDialog {
 
     JDlgApc_Usuarios jDlgApc_Usuarios;
+    Apc_ControllerUsuarios apc_controllerUsuarios;
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
@@ -18,6 +24,11 @@ public class JDlgApc_UsuariosPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Usuários");
+        DAO_ApcUsuarios apc_usuariosDao = new DAO_ApcUsuarios();
+        List lista = (List) apc_usuariosDao.listAll();
+        apc_controllerUsuarios = new Apc_ControllerUsuarios();
+        apc_controllerUsuarios.setList(lista);
+        jTable1.setModel(apc_controllerUsuarios);
     }
 
     public void setTelaPai(JDlgApc_Usuarios jDlgApc_Usuarios) {
@@ -91,6 +102,8 @@ public class JDlgApc_UsuariosPesquisar extends javax.swing.JDialog {
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
         int linSel = jTable1.getSelectedRow();
+        ApcUsuarios apc_usuarios = (ApcUsuarios) apc_controllerUsuarios.getBean(linSel);
+        jDlgApc_Usuarios.beanView(apc_usuarios);
         setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 

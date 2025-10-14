@@ -5,6 +5,7 @@
 package view;
 
 import dao.DAO_ApcUsuarios;
+import bean.ApcUsuarios;
 import tools.Util;
 
 /**
@@ -16,7 +17,9 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuarios
      */
-
+    boolean alterar = false;
+    boolean foiPesquisado = false;
+    
     public JDlgApc_Usuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -25,6 +28,40 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
         Util.habilitar(false, jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha,jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }
    
+    public ApcUsuarios viewBean() {
+        ApcUsuarios usuarios = new ApcUsuarios();
+        usuarios.setApcIdUsuarios(Util.strToInt( jTxtApc_Codigo.getText() ));
+//      int codigo = Util.strToInt(jTxtApc_Codigo.getText());
+//      usuarios.setApcIdUsuarios(codigo);
+        usuarios.setApcNome(jTxtApc_Nome.getText());
+        usuarios.setApcApelido(jTxtApc_Apelido.getText());
+        usuarios.setApcCpf(jFmtApc_Cpf.getText());
+        usuarios.setApcDataNascimento(Util.strToDate(jFmtApc_DataNascimento.getText()));
+        usuarios.setApcSenha(jPwfApc_Senha.getText());
+        usuarios.setApcNivel((jCboApc_Nivel.getSelectedIndex()));
+        if (jChbApc_Ativo.isSelected() == true) {
+            usuarios.setApcAtivo("S");
+        } else {
+            usuarios.setApcAtivo("N");
+        }
+        return usuarios;
+    }
+
+    public void beanView(ApcUsuarios usuarios) {
+        jTxtApc_Codigo.setText(Util.intToStr(usuarios.getApcIdUsuarios()));
+        jTxtApc_Nome.setText(usuarios.getApcNome());
+        jTxtApc_Apelido.setText(usuarios.getApcApelido());
+        jFmtApc_Cpf.setText(usuarios.getApcCpf());
+        jFmtApc_DataNascimento.setText(Util.dateToStr(usuarios.getApcDataNascimento()));
+        jPwfApc_Senha.setText(usuarios.getApcSenha());
+        jCboApc_Nivel.setSelectedIndex((usuarios.getApcNivel()));
+//        jChbApc_Ativo.setSelected(usuarios.getApcAtivo().equals("S"));
+        if (usuarios.getApcAtivo().equals("S") == true) {
+            jChbApc_Ativo.setSelected(true);
+        } else {
+            jChbApc_Ativo.setSelected(false);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,47 +210,49 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jTxtApc_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTxtApc_Nome))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTxtApc_Apelido, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)
-                                .addComponent(jFmtApc_DataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLblCodigo2)
-                                .addComponent(jCboApc_Nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(22, 22, 22)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jChbApc_Ativo)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel3))
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(jFmtApc_Cpf)
-                                .addComponent(jPwfApc_Senha))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLblCodigo)
-                        .addGap(69, 69, 69)
-                        .addComponent(jLblCodigo1))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTxtApc_Apelido, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jFmtApc_DataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLblCodigo2)
+                                    .addComponent(jCboApc_Nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jChbApc_Ativo)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel3))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jFmtApc_Cpf)
+                                    .addComponent(jPwfApc_Senha)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLblCodigo)
+                                .addGap(69, 69, 69)
+                                .addComponent(jLblCodigo1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBtnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnAlterar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnExcluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnConfirmar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnPesquisar))
+                            .addComponent(jLabel4)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnConfirmar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnPesquisar))
-                    .addComponent(jLabel4))
+                        .addContainerGap()
+                        .addComponent(jTxtApc_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(jTxtApc_Nome)))
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -265,9 +304,14 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtApc_Apelido,jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-
+        if (!foiPesquisado) {
+            Util.mensagem("Você deve pesquisar primeiro!");
+            return;
+        } else {
+            alterar = true;
+            Util.habilitar(true, jTxtApc_Apelido,jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jPwfApc_SenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPwfApc_SenhaActionPerformed
@@ -299,21 +343,37 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
         Util.habilitar(true, jTxtApc_Apelido,jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
-        
+        jTxtApc_Codigo.grabFocus();
+        alterar = false;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        Util.perguntar("Deseja excluir o registro?");
+        if (!foiPesquisado) {
+            Util.mensagem("Você deve pesquisar primeiro!");
+            return;
+        } else {
+            if (Util.perguntar("Deseja realmente Excluir?") == true) {
+                DAO_ApcUsuarios usuariosDAO = new DAO_ApcUsuarios();
+                usuariosDAO.delete(viewBean());
+            }
+        }
+        Util.limpar(jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-       Util.habilitar(false, jTxtApc_Apelido, jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jTxtApc_Apelido, jPwfApc_Senha, jTxtApc_Nome, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         DAO_ApcUsuarios dao_ApcUsuarios = new DAO_ApcUsuarios();
-        dao_ApcUsuarios.insert(viewBean);
+        
+        if (alterar == false){
+            dao_ApcUsuarios.insert(viewBean());
+        } else{
+            dao_ApcUsuarios.update(viewBean());
+        }
+        Util.limpar(jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha, jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -329,6 +389,8 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
         JDlgApc_UsuariosPesquisar jDlgApc_UsuariosPesquisar = new JDlgApc_UsuariosPesquisar(null, true);
         jDlgApc_UsuariosPesquisar.setTelaPai(this);
         jDlgApc_UsuariosPesquisar.setVisible(true);
+        foiPesquisado = true;
+
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**

@@ -4,6 +4,10 @@
  */
 package view;
 
+import bean.ApcVendedor;
+import dao.DAO_ApcVendedor;
+import java.util.List;
+
 
 /**
  *
@@ -12,6 +16,8 @@ package view;
 public class JDlgApc_VendedorPesquisar extends javax.swing.JDialog {
 
     JDlgApc_Vendedor jDlgApc_Vendedor;
+    Apc_ControllerVendedor apc_controllerVendedor;
+
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
@@ -20,7 +26,11 @@ public class JDlgApc_VendedorPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Vendedor");
-
+        DAO_ApcVendedor apc_vendedorDao = new DAO_ApcVendedor();
+        List lista = (List) apc_vendedorDao.listAll();
+        apc_controllerVendedor = new Apc_ControllerVendedor();
+        apc_controllerVendedor.setList(lista);
+        jTable1.setModel(apc_controllerVendedor);
     }
 
     public void setTelaPai(JDlgApc_Vendedor jDlgApc_Vendedor) {
@@ -94,6 +104,8 @@ public class JDlgApc_VendedorPesquisar extends javax.swing.JDialog {
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
         int linSel = jTable1.getSelectedRow();
+        ApcVendedor apcvendedor = (ApcVendedor) apc_controllerVendedor.getBean(linSel);
+        jDlgApc_Vendedor.beanView(apcvendedor);
         setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 

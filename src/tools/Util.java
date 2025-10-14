@@ -56,12 +56,19 @@ public class Util {
     }
 
     public static boolean perguntar(String cad){
-        JOptionPane.showConfirmDialog(null, cad);
-        return true;
+        int resp = JOptionPane.showConfirmDialog(null, cad, "Perguntar", JOptionPane.YES_NO_OPTION);
+        
+        return resp == JOptionPane.YES_OPTION; //se isso for verdadeiro vai retornar verdadeiro, se não retorna false ( tudo em uma linha)
+        
+        //if(resp == JOptionPane.YES_OPTION){
+        //    return true;
+        //} else {
+        //    return false; 
+        //}
+        
     }
 
     public static int strToInt(String cad) {
-        if (cad == null || cad.isEmpty()) return 0;
         return Integer.parseInt(cad);
     }
     
@@ -70,7 +77,6 @@ public class Util {
     }
 
     public static double strToDouble(String cad){
-        if (cad == null || cad.isEmpty()) return 0.0;
         return Double.parseDouble(cad);
     }
 
@@ -80,7 +86,6 @@ public class Util {
 
     public static Date strToDate(String cad){
         try {
-            if (cad == null || cad.isEmpty()) return null; 
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             return formato.parse(cad);
         } catch (ParseException e) {
@@ -89,7 +94,6 @@ public class Util {
     }
 
     public static String dateToStr(Date data){
-        if (data == null) return "";
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         return formato.format(data);
     }

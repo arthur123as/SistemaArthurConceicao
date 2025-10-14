@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.ApcClientes;
+import dao.DAO_ApcClientes;
 import tools.Util;
 
 /**
@@ -15,6 +17,9 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuarios
      */
+    boolean alterar = false;
+    boolean foiPesquisado = false;
+    
     public JDlgApc_Clientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -23,6 +28,64 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
         Util.habilitar(false, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }
 
+       
+    public ApcClientes viewBean() {
+        ApcClientes clientes = new ApcClientes();
+        clientes.setApcIdClientes(Util.strToInt( jTxtApc_Codigo.getText() ));
+//      int codigo = Util.strToInt(jTxtApc_Codigo.getText());
+//      usuarios.setApcIdUsuarios(codigo);
+        clientes.setApcNome(jTxtApc_Nome.getText());
+        clientes.setApcRg(jTxtApc_Rg.getText());
+        clientes.setApcCpf(jFmtApc_Cpf.getText());
+        if (jCboApc_Sexo.getSelectedItem().toString().equals("Masculino")) {
+            clientes.setApcSexo("M");
+        } else {
+            clientes.setApcSexo("F");
+        }
+        clientes.setApcDataNascimento(Util.strToDate(jFmtApc_DataNascimento.getText()));
+        clientes.setApcEmail(jTxtApc_Email.getText());
+        clientes.setApcTelefoneResidencial(jFmtApc_TelefoneResidencial.getText());
+        clientes.setApcCelular(jFmtApc_Celular.getText());
+        clientes.setApcCep(jFmtApc_Cep.getText());
+        clientes.setApcEndereco(jTxtApc_Endereco.getText());
+        clientes.setApcBairro(jTxtApc_Bairro.getText());
+        clientes.setApcCidade(jTxtApc_Cidade.getText());
+        clientes.setApcDataCadastro(Util.strToDate(jFmtApc_DataCadastro.getText()));
+
+        clientes.setApcAtivo(jChbApc_Ativo.isSelected() ? "S" : "N");
+
+        return clientes;
+    }
+
+    public void beanView(ApcClientes clientes) {
+        jTxtApc_Codigo.setText(Util.intToStr(clientes.getApcIdClientes()));
+        jTxtApc_Nome.setText(clientes.getApcNome());
+        jTxtApc_Rg.setText(clientes.getApcRg());
+        jFmtApc_Cpf.setText(clientes.getApcCpf());
+
+        if (clientes.getApcSexo().equals("M")) {
+            jCboApc_Sexo.setSelectedItem("Masculino");
+        } else {
+            jCboApc_Sexo.setSelectedItem("Feminino");
+        }
+
+        jFmtApc_DataNascimento.setText(Util.dateToStr(clientes.getApcDataNascimento()));
+        jTxtApc_Email.setText(clientes.getApcEmail());
+        jFmtApc_TelefoneResidencial.setText(clientes.getApcTelefoneResidencial());
+        jFmtApc_Celular.setText(clientes.getApcCelular());
+        jFmtApc_Cep.setText(clientes.getApcCep());
+        jTxtApc_Endereco.setText(clientes.getApcEndereco());
+        jTxtApc_Bairro.setText(clientes.getApcBairro());
+        jTxtApc_Cidade.setText(clientes.getApcCidade());
+        jFmtApc_DataCadastro.setText(Util.dateToStr(clientes.getApcDataCadastro()));
+
+        if (clientes.getApcAtivo().equals("S")) {
+            jChbApc_Ativo.setSelected(true);
+        } else {
+            jChbApc_Ativo.setSelected(false);
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -362,8 +425,14 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        if (!foiPesquisado) {
+            Util.mensagem("Você deve pesquisar primeiro!");
+            return;
+        } else {
+            alterar = true;
+            Util.habilitar(true, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jFmtApc_CpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtApc_CpfActionPerformed
@@ -387,18 +456,35 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
         Util.habilitar(true, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo);
+        jTxtApc_Codigo.grabFocus();
+        alterar = false;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        Util.perguntar("Deseja excluir o registro?");
-
+        if (!foiPesquisado) {
+            Util.mensagem("Você deve pesquisar primeiro!");
+            return;
+        } else {
+            if (Util.perguntar("Deseja realmente Excluir?") == true) {
+                DAO_ApcClientes vendedorDAO = new DAO_ApcClientes();
+                vendedorDAO.delete(viewBean());
+                Util.limpar(jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo);
+            }  
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         Util.habilitar(false, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        DAO_ApcClientes dao_ApcClientes = new DAO_ApcClientes();
+        
+        if (alterar == false){
+            dao_ApcClientes.insert(viewBean());
+        } else{
+            dao_ApcClientes.update(viewBean());
+        }
         Util.limpar(jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo);
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
@@ -416,6 +502,8 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
         JDlgApc_ClientesPesquisar jDlgApc_ClientesPesquisar = new JDlgApc_ClientesPesquisar(null, true);
         jDlgApc_ClientesPesquisar.setTelaPai(this);
         jDlgApc_ClientesPesquisar.setVisible(true);
+        foiPesquisado = true;
+
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jCboApc_SexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboApc_SexoActionPerformed

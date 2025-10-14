@@ -3,13 +3,10 @@ package bean;
 
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,7 +26,7 @@ public class ApcProdutos  implements java.io.Serializable {
      private String apcDescricao;
      private double apcPreco;
      private String apcFabricante;
-     private String apcCategoria;
+     private int apcCategoria;
      private Date apcDataCadastro;
      private String apcAtivo;
 
@@ -37,7 +34,7 @@ public class ApcProdutos  implements java.io.Serializable {
     }
 
 	
-    public ApcProdutos(int apcIdProdutos, String apcNome, double apcPreco, String apcFabricante, String apcCategoria, String apcAtivo) {
+    public ApcProdutos(int apcIdProdutos, String apcNome, double apcPreco, String apcFabricante, int apcCategoria, String apcAtivo) {
         this.apcIdProdutos = apcIdProdutos;
         this.apcNome = apcNome;
         this.apcPreco = apcPreco;
@@ -45,7 +42,7 @@ public class ApcProdutos  implements java.io.Serializable {
         this.apcCategoria = apcCategoria;
         this.apcAtivo = apcAtivo;
     }
-    public ApcProdutos(int apcIdProdutos, String apcNome, String apcDescricao, double apcPreco, String apcFabricante, String apcCategoria, Date apcDataCadastro, String apcAtivo, Set apcVendasProdutoses) {
+    public ApcProdutos(int apcIdProdutos, String apcNome, String apcDescricao, double apcPreco, String apcFabricante, int apcCategoria, Date apcDataCadastro, String apcAtivo, Set apcVendasProdutoses) {
        this.apcIdProdutos = apcIdProdutos;
        this.apcNome = apcNome;
        this.apcDescricao = apcDescricao;
@@ -110,11 +107,11 @@ public class ApcProdutos  implements java.io.Serializable {
 
     
     @Column(name="apc_categoria", nullable=false, length=50)
-    public String getApcCategoria() {
+    public int getApcCategoria() {
         return this.apcCategoria;
     }
     
-    public void setApcCategoria(String apcCategoria) {
+    public void setApcCategoria(int apcCategoria) {
         this.apcCategoria = apcCategoria;
     }
 
