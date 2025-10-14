@@ -226,6 +226,10 @@ public class ApcClientes  implements java.io.Serializable {
         this.apcAtivo = apcAtivo;
     }
 
+    @Override
+    public String toString() {
+        return this.apcNome;
+    }
 
 
 

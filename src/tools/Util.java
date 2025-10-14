@@ -77,6 +77,7 @@ public class Util {
     }
 
     public static double strToDouble(String cad){
+        cad = cad.replace(",", ".").trim();
         return Double.parseDouble(cad);
     }
 
@@ -96,6 +97,33 @@ public class Util {
     public static String dateToStr(Date data){
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         return formato.format(data);
+    }
+    
+    public static boolean isValidCPF(String cpf) {
+        cpf = cpf.replaceAll("[^\\d]", ""); // Remove pontos e traço
+
+        if (cpf.length() != 11 || cpf.matches("(\\d)\\1{10}")) return false;
+
+        try {
+            int d1 = 0, d2 = 0;
+            for (int i = 0; i < 9; i++) {
+                int digito = Character.getNumericValue(cpf.charAt(i));
+                d1 += digito * (10 - i);
+                d2 += digito * (11 - i);
+            }
+
+            d1 = 11 - (d1 % 11);
+            d1 = (d1 >= 10) ? 0 : d1;
+
+            d2 += d1 * 2;
+            d2 = 11 - (d2 % 11);
+            d2 = (d2 >= 10) ? 0 : d2;
+
+            return d1 == Character.getNumericValue(cpf.charAt(9)) &&
+                   d2 == Character.getNumericValue(cpf.charAt(10));
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
     

@@ -6,6 +6,7 @@ package view;
 
 import dao.DAO_ApcUsuarios;
 import bean.ApcUsuarios;
+import javax.swing.JOptionPane;
 import tools.Util;
 
 /**
@@ -24,6 +25,16 @@ public class JDlgApc_Usuarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro de Usuários");
+        jFmtApc_Cpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                String cpf = jFmtApc_Cpf.getText();
+                if (!Util.isValidCPF(cpf)) {
+                    JOptionPane.showMessageDialog(null, "O CPF preenchido é inválido!", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+                    jFmtApc_Cpf.setText("");
+                    jFmtApc_Cpf.requestFocus();
+                }
+            }
+        });
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtApc_Apelido, jTxtApc_Nome,jPwfApc_Senha,jTxtApc_Codigo, jFmtApc_Cpf, jFmtApc_DataNascimento, jCboApc_Nivel, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }

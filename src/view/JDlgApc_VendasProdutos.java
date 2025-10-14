@@ -18,6 +18,7 @@ public class JDlgApc_VendasProdutos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("VendasProdutos");
     }
 
     /**

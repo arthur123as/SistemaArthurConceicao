@@ -6,6 +6,8 @@ package view;
 
 import bean.ApcClientes;
 import dao.DAO_ApcClientes;
+import dao.DAO_ApcVendas;
+import javax.swing.JOptionPane;
 import tools.Util;
 
 /**
@@ -23,12 +25,21 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
     public JDlgApc_Clientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jFmtApc_Cpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                String cpf = jFmtApc_Cpf.getText();
+                if (!Util.isValidCPF(cpf)) {
+                    JOptionPane.showMessageDialog(null, "O CPF preenchido é inválido!", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+                    jFmtApc_Cpf.setText("");
+                    jFmtApc_Cpf.requestFocus();
+                }
+            }
+        });
         setTitle("Cadastro de Clientes");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }
-
-       
+        
     public ApcClientes viewBean() {
         ApcClientes clientes = new ApcClientes();
         clientes.setApcIdClientes(Util.strToInt( jTxtApc_Codigo.getText() ));
@@ -466,11 +477,22 @@ public class JDlgApc_Clientes extends javax.swing.JDialog {
             Util.mensagem("Você deve pesquisar primeiro!");
             return;
         } else {
-            if (Util.perguntar("Deseja realmente Excluir?") == true) {
-                DAO_ApcClientes vendedorDAO = new DAO_ApcClientes();
-                vendedorDAO.delete(viewBean());
-                Util.limpar(jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf, jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial, jCboApc_Sexo, jChbApc_Ativo);
-            }  
+            ApcClientes cliente = viewBean();
+            DAO_ApcVendas daoVendas = new DAO_ApcVendas();
+
+            if (daoVendas.hasVendasDoCliente(cliente)) {
+                Util.mensagem("Não é possível excluir: o cliente possui vendas registradas.");
+                return;
+            }
+
+            if (Util.perguntar("Deseja realmente Excluir?")) {
+                DAO_ApcClientes daoClientes = new DAO_ApcClientes();
+                daoClientes.delete(cliente);
+                Util.limpar(jTxtApc_Rg, jTxtApc_Nome, jTxtApc_Endereco, jTxtApc_Email, jTxtApc_Codigo,
+                             jTxtApc_Cidade, jTxtApc_Bairro, jFmtApc_Celular, jFmtApc_Cep, jFmtApc_Cpf,
+                             jFmtApc_DataCadastro, jFmtApc_DataNascimento, jFmtApc_TelefoneResidencial,
+                             jCboApc_Sexo, jChbApc_Ativo);
+            }
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 

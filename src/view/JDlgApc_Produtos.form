@@ -26,21 +26,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTxtApc_Descricao" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jTxtApc_Codigo" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTxtApc_Nome" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jTxtApc_Preco" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jBtnIncluir" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jBtnAlterar" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jFmtApc_Preco" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -85,6 +79,12 @@
                               </Group>
                           </Group>
                       </Group>
+                  </Group>
+                  <Component id="jTxtApc_Descricao" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jTxtApc_Codigo" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jTxtApc_Nome" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -134,7 +134,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTxtApc_Fabricante" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jCboApc_Categoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTxtApc_Preco" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFmtApc_Preco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -306,10 +306,12 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtApc_Preco">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtApc_PrecoActionPerformed"/>
-      </Events>
+    <Component class="javax.swing.JFormattedTextField" name="jFmtApc_Preco">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="#0.00" subtype="-1" type="0"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

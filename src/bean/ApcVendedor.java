@@ -224,6 +224,11 @@ public class ApcVendedor  implements java.io.Serializable {
     public void setApcAtivo(String apcAtivo) {
         this.apcAtivo = apcAtivo;
     }
+    
+    @Override
+    public String toString() {
+        return this.apcNome; // Mostra o nome do vendedor no combo box
+    }
 
 }
 

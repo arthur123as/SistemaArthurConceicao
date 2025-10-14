@@ -28,7 +28,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Produtos");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
 
     }
     
@@ -38,7 +38,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         produtos.setApcNome(jTxtApc_Nome.getText());
         produtos.setApcDescricao(jTxtApc_Descricao.getText());
         produtos.setApcFabricante(jTxtApc_Fabricante.getText());
-        produtos.setApcPreco(Util.strToDouble(jTxtApc_Preco.getText()));
+        produtos.setApcPreco(Util.strToDouble(jFmtApc_Preco.getText()));
         produtos.setApcCategoria(jCboApc_Categoria.getSelectedIndex());
         produtos.setApcDataCadastro(Util.strToDate(jFmtApc_DataCadastro.getText()));
         produtos.setApcAtivo(jChbApc_Ativo.isSelected() ? "S" : "N");
@@ -51,7 +51,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         jTxtApc_Nome.setText(produtos.getApcNome());
         jTxtApc_Descricao.setText(produtos.getApcDescricao());
         jTxtApc_Fabricante.setText(produtos.getApcFabricante());
-        jTxtApc_Preco.setText(Util.doubleToStr(produtos.getApcPreco()));
+        jFmtApc_Preco.setText(Util.doubleToStr(produtos.getApcPreco()));
         jCboApc_Categoria.setSelectedIndex(produtos.getApcCategoria());
         jFmtApc_DataCadastro.setText(Util.dateToStr(produtos.getApcDataCadastro()));
         jChbApc_Ativo.setSelected(produtos.getApcAtivo().equals("S"));
@@ -85,7 +85,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         jCboApc_Categoria = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jFmtApc_DataCadastro = new javax.swing.JFormattedTextField();
-        jTxtApc_Preco = new javax.swing.JTextField();
+        jFmtApc_Preco = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -172,11 +172,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        jTxtApc_Preco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtApc_PrecoActionPerformed(evt);
-            }
-        });
+        jFmtApc_Preco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,19 +181,14 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTxtApc_Descricao)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTxtApc_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTxtApc_Nome))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTxtApc_Preco)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(jBtnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnAlterar)))
+                                .addComponent(jBtnAlterar))
+                            .addComponent(jFmtApc_Preco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -229,6 +220,11 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addComponent(jTxtApc_Descricao)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTxtApc_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTxtApc_Nome))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,7 +263,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtApc_Fabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCboApc_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtApc_Preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFmtApc_Preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -296,7 +292,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
             return;
         } else {
             alterar = true;
-            Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
             Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         }
 
@@ -308,9 +304,9 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         jTxtApc_Codigo.grabFocus();
         alterar = false;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
@@ -326,12 +322,12 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
                 produtosDAO.delete(viewBean());
             }
         }
-        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         DAO_ApcProdutos dao_ApcProdutos = new DAO_ApcProdutos();
         
@@ -340,15 +336,15 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
         } else{
             dao_ApcProdutos.update(viewBean());
         }
-        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jTxtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
+        Util.limpar(jTxtApc_Codigo, jTxtApc_Descricao, jTxtApc_Fabricante, jTxtApc_Nome, jFmtApc_Preco, jFmtApc_DataCadastro, jCboApc_Categoria, jChbApc_Ativo, jBtnConfirmar, jBtnCancelar);
 
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
@@ -363,10 +359,6 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
     private void jTxtApc_FabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApc_FabricanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtApc_FabricanteActionPerformed
-
-    private void jTxtApc_PrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApc_PrecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtApc_PrecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,6 +415,7 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jCboApc_Categoria;
     private javax.swing.JCheckBox jChbApc_Ativo;
     private javax.swing.JFormattedTextField jFmtApc_DataCadastro;
+    private javax.swing.JFormattedTextField jFmtApc_Preco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -434,6 +427,5 @@ public class JDlgApc_Produtos extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtApc_Descricao;
     private javax.swing.JTextField jTxtApc_Fabricante;
     private javax.swing.JTextField jTxtApc_Nome;
-    private javax.swing.JTextField jTxtApc_Preco;
     // End of variables declaration//GEN-END:variables
 }

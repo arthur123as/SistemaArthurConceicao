@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package dao;
+import bean.ApcClientes;
 import bean.ApcVendas;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -58,6 +60,20 @@ public class DAO_ApcVendas extends DAO_Abstract{
         session.getTransaction().commit();    
         return lista;
     }
+    
+    public boolean hasVendasDoCliente(ApcClientes cliente) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "SELECT count(v) FROM ApcVendas v WHERE v.apcClientes = :cliente";
+            Long count = (Long) session.createQuery(hql)
+                                       .setParameter("cliente", cliente)
+                                       .uniqueResult();
+            return count > 0;
+        } finally {
+            session.close();
+        }
+    }
+
     
     public static void main(String[] args) {
         DAO_ApcVendas dao_ApcVendas = new DAO_ApcVendas();
