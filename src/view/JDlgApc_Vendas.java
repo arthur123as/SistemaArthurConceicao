@@ -378,10 +378,16 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
-        // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o produto ?") == true) {
-
+        if (!foiPesquisado) {
+            Util.mensagem("Você deve pesquisar primeiro!");
+            return;
+        } else {
+            if (Util.perguntar("Deseja realmente Excluir?") == true) {
+                DAO_ApcVendas vendasDAO = new DAO_ApcVendas();
+                vendasDAO.delete(viewBean());
+            }
         }
+        Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jFmtApc_Total);
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
