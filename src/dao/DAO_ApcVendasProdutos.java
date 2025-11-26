@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
+import bean.ApcVendas;
 import bean.ApcVendasProdutos;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -49,7 +50,15 @@ public class DAO_ApcVendasProdutos extends DAO_Abstract{
         session.getTransaction().commit();    
         return lista;
     }
-
+    
+    public Object listProdutos(ApcVendas vendas) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendasProdutos.class);
+        criteria.add(Restrictions.eq("apcVendas", vendas));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
     @Override
     public List listAll() {
         session.beginTransaction();

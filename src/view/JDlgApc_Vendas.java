@@ -9,8 +9,11 @@ import dao.DAO_ApcClientes;
 import bean.ApcClientes;
 import bean.ApcVendas;
 import bean.ApcVendedor;
+import bean.ApcVendasProdutos;
 import dao.DAO_ApcVendas;
+import dao.DAO_ApcVendasProdutos;
 import dao.DAO_ApcVendedor;
+import java.util.ArrayList;
 import tools.Util;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
     
     boolean alterar = false;
     boolean foiPesquisado = false;
+    Apc_ControllerVendasProdutos apc_ControllerVendasProdutos;
     
     public JDlgApc_Vendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -47,24 +51,32 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
         for (int i = 0; i < listaVendedor.size(); i++) {
             jCboVendedor.addItem((ApcVendedor) listaVendedor.get(i));
         }
+        
+        apc_ControllerVendasProdutos = new Apc_ControllerVendasProdutos();
+        apc_ControllerVendasProdutos.setList(new ArrayList());
+        jTable2.setModel(apc_ControllerVendasProdutos);
     }
 
     public ApcVendas viewBean() {
-        ApcVendas pedidos = new ApcVendas();
-        pedidos.setApcIdPedidos(Util.strToInt(jTxtCodigo.getText()));
-        pedidos.setApcClientes((ApcClientes) jCboClientes.getSelectedItem() );
-        pedidos.setApcVendedor((ApcVendedor) jCboVendedor.getSelectedItem());
-        pedidos.setApcDataPedido(Util.strToDate(jFmtData.getText()));
-        pedidos.setApcTotal(Util.strToDouble(jFmtApc_Total.getText()));
-        return pedidos;
+        ApcVendas vendas = new ApcVendas();
+        vendas.setApcIdPedidos(Util.strToInt(jTxtCodigo.getText()));
+        vendas.setApcClientes((ApcClientes) jCboClientes.getSelectedItem() );
+        vendas.setApcVendedor((ApcVendedor) jCboVendedor.getSelectedItem());
+        vendas.setApcDataPedido(Util.strToDate(jFmtData.getText()));
+        vendas.setApcTotal(Util.strToDouble(jFmtApc_Total.getText()));
+        return vendas;
     }
     
-    public void beanView(ApcVendas pedidos) {
-        jTxtCodigo.setText(Util.intToStr(pedidos.getApcIdPedidos()));
-        jCboClientes.setSelectedItem(pedidos.getApcClientes());
-        jCboVendedor.setSelectedItem(pedidos.getApcVendedor());
-        jFmtData.setText(Util.dateToStr(pedidos.getApcDataPedido()));
-        jFmtApc_Total.setText(Util.doubleToStr(pedidos.getApcTotal()));
+    public void beanView(ApcVendas vendas) {
+        jTxtCodigo.setText(Util.intToStr(vendas.getApcIdPedidos()));
+        jCboClientes.setSelectedItem(vendas.getApcClientes());
+        jCboVendedor.setSelectedItem(vendas.getApcVendedor());
+        jFmtData.setText(Util.dateToStr(vendas.getApcDataPedido()));
+        jFmtApc_Total.setText(Util.doubleToStr(vendas.getApcTotal()));
+        
+        DAO_ApcVendasProdutos vendasProdutosDAO = new DAO_ApcVendasProdutos();
+        List lista = (List) vendasProdutosDAO.listProdutos(vendas);
+        apc_ControllerVendasProdutos.setList(lista);
     }
 
     /**
@@ -315,6 +327,7 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
         Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jFmtApc_Total);
         jTxtCodigo.grabFocus();
         alterar = false;
+        apc_ControllerVendasProdutos.setList(new ArrayList());
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -327,6 +340,7 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
             Util.habilitar(true, jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jFmtApc_Total,
                     jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
             Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+            apc_ControllerVendasProdutos.setList(new ArrayList());
         }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -338,10 +352,18 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
         } else {
             if (Util.perguntar("Deseja realmente Excluir?") == true) {
                 DAO_ApcVendas vendasDAO = new DAO_ApcVendas();
+                DAO_ApcVendasProdutos vendasProdutosDAO = new DAO_ApcVendasProdutos();
+                
+                for (int ind = 0; ind < jTable2.getRowCount(); ind++) {
+                    ApcVendasProdutos vendasProdutos = (ApcVendasProdutos) apc_ControllerVendasProdutos.getBean(ind);
+                    vendasProdutosDAO.delete(vendasProdutos);
+                }
+                
                 vendasDAO.delete(viewBean());
             }
         }
         Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jFmtApc_Total);
+        apc_ControllerVendasProdutos.setList(new ArrayList());
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed

@@ -101,10 +101,13 @@ public class JDlgApc_Login extends javax.swing.JDialog {
         // TODO add your handling code here:
         String username = jTxtApc_Apelido.getText();
         String senha = new String(jPwfApc_Senha.getPassword());
+        
+        DAO_ApcUsuarios usuariosDao = new DAO_ApcUsuarios();
+        ApcUsuarios usuarios = (ApcUsuarios) usuariosDao.listLogin(username, senha);
 
         if(username.equals("") || senha.equals("")){
             JOptionPane.showMessageDialog(this, "Usuário e/ou senha em branco. Preencha corretamente!");
-        } else if (username.equals("marcos") || senha.equals("vilhanueva")) {
+        } else if (usuarios != null && username.equals(usuarios.getApcApelido()) && senha.equals(usuarios.getApcSenha())) {
             this.dispose();
             JFrmPrincipal principal = new JFrmPrincipal();
             principal.setVisible(true);

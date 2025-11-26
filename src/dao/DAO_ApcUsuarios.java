@@ -49,6 +49,20 @@ public class DAO_ApcUsuarios extends DAO_Abstract{
         session.getTransaction().commit();    
         return lista;
     }
+    
+    public Object listLogin(String username, String senha) {
+        session.beginTransaction();
+
+        Criteria criteria = session.createCriteria(ApcUsuarios.class);
+        criteria.add(Restrictions.eq("apcApelido", username));
+        criteria.add(Restrictions.eq("apcSenha", senha));
+
+        ApcUsuarios usuario = (ApcUsuarios) criteria.uniqueResult();
+
+        session.getTransaction().commit();
+        return usuario;
+    }
+
 
     @Override
     public List listAll() {

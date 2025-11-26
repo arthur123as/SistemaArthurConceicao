@@ -5,6 +5,7 @@
 package view;
 
 
+import bean.ApcVendasProdutos;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,19 +15,31 @@ import javax.swing.table.AbstractTableModel;
  */
 public class Apc_ControllerVendasProdutos extends AbstractTableModel {
     
-    List lista;
+    private List lstVendasProdutos;
     
-    public void setList(List lista) {
-        this.lista = lista;
+    public void setList(List lstVendasProdutos) {
+        this.lstVendasProdutos = lstVendasProdutos;
+        
+        this.fireTableDataChanged();    
     }
     
     public Object getBean(int rowIndex) {
-        return lista.get(rowIndex);
+        return (ApcVendasProdutos) lstVendasProdutos.get(rowIndex);
+    }
+    
+    public void addBean(ApcVendasProdutos vendasProdutos) {
+        lstVendasProdutos.add(vendasProdutos);
+        this.fireTableDataChanged();
+    }
+    
+    public void removeBean(int rowIndex) {
+        lstVendasProdutos.remove(rowIndex);
+        this.fireTableDataChanged();
     }
     
     @Override
     public int getRowCount() {
-        return 0;
+        return lstVendasProdutos.size();                
     }
 
     @Override
@@ -36,7 +49,19 @@ public class Apc_ControllerVendasProdutos extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return "";
+        ApcVendasProdutos vendasProdutos = (ApcVendasProdutos) lstVendasProdutos.get(rowIndex);
+        if ( columnIndex == 0 ){
+            return vendasProdutos.getApcProdutos().getApcIdProdutos();
+        } else if (columnIndex ==1) {
+            return vendasProdutos.getApcProdutos().getApcNome();
+        } else if (columnIndex ==2) {
+            return vendasProdutos.getApcQuantidade();
+        } else if (columnIndex ==3) {
+            return vendasProdutos.getApcPrecoUnitario();
+        }else if (columnIndex ==4) {
+            return vendasProdutos.getApcPrecoUnitario()*vendasProdutos.getApcQuantidade();
+        }
+        return ""; 
     }
     
     @Override
