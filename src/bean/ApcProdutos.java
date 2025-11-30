@@ -135,6 +135,21 @@ public class ApcProdutos  implements java.io.Serializable {
         this.apcAtivo = apcAtivo;
     }
 
+    @Override
+    public String toString() {
+        return this.apcIdProdutos + " - " + this.apcNome;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof ApcProdutos) {
+            ApcProdutos produtos = (ApcProdutos) object;
+            if (produtos.getApcIdProdutos()== this.getApcIdProdutos()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

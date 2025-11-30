@@ -14,50 +14,53 @@ import javax.swing.table.AbstractTableModel;
  */
 public class Apc_ControllerVendas extends AbstractTableModel {
     
-    List lista;
-    
-    public void setList(List lista) {
-        this.lista = lista;
+    private List lstVendas;
+
+    public void setList(List lstVendas) {
+        this.lstVendas = lstVendas;
     }
     
-    public Object getBean(int rowIndex) {
-        return lista.get(rowIndex);
+    public ApcVendas getBean(int rowIndex) {
+        return (ApcVendas) lstVendas.get(rowIndex);
     }
-    
+
     @Override
     public int getRowCount() {
-        return lista.size();
+        return lstVendas.size();
+                
     }
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ApcVendas apc_vendas = (ApcVendas) lista.get(rowIndex);
-        if (columnIndex == 0) {
-            return apc_vendas.getApcIdPedidos();
-        } 
-        
-        if (columnIndex == 1) {
-            return apc_vendas.getApcDataPedido();
-        } 
-        
-        if (columnIndex == 2) {
-            return apc_vendas.getApcTotal();
+        ApcVendas vendas = (ApcVendas) lstVendas.get(rowIndex);
+        if ( columnIndex == 0 ){
+            return vendas.getApcIdPedidos();
+        } else if (columnIndex ==1) {
+            return vendas.getApcDataPedido();        
+        } else if (columnIndex ==2) {
+            return vendas.getApcTotal();
+        } else if (columnIndex ==3) {
+            return vendas.getApcClientes().getApcNome();
         }
-        
-        return "";
+        return ""; 
     }
-    
+
     @Override
-    public String getColumnName (int column) {
-        if (column == 0) return "Nº do Pedido";
-        if (column == 1) return "Data do Pedido";
-        if (column == 2) return "Total";
+    public String getColumnName(int columnIndex) {
+        
+        if (columnIndex == 0) return "Nº da Venda";
+        if (columnIndex == 1) return "Data da Venda";
+        if (columnIndex == 2) return "Total";
+        if (columnIndex == 3) return "Cliente";
         
         return "";
     }
+
+    
+
 }

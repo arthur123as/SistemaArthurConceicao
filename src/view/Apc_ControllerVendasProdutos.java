@@ -23,7 +23,7 @@ public class Apc_ControllerVendasProdutos extends AbstractTableModel {
         this.fireTableDataChanged();    
     }
     
-    public Object getBean(int rowIndex) {
+    public ApcVendasProdutos getBean(int rowIndex) {
         return (ApcVendasProdutos) lstVendasProdutos.get(rowIndex);
     }
     

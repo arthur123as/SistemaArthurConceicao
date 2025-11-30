@@ -7,6 +7,7 @@ package view;
 import bean.ApcProdutos;
 import dao.DAO_ApcProdutos;
 import java.util.List;
+import tools.Util;
 
 /**
  *
@@ -64,6 +65,11 @@ public class JDlgApc_ProdutosPesquisar extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBtnOk.setText("Ok");
@@ -101,11 +107,21 @@ public class JDlgApc_ProdutosPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        int linSel = jTable1.getSelectedRow();
-        ApcProdutos apcprodutos = (ApcProdutos) apc_controllerProdutos.getBean(linSel);
-        jDlgApc_Produtos.beanView(apcprodutos);
-        setVisible(false);
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            ApcProdutos produtos = apc_controllerProdutos.getBean(jTable1.getSelectedRow());
+            jDlgApc_Produtos.beanView(produtos);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            jBtnOkActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

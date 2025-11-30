@@ -20,8 +20,8 @@ public class Apc_ControllerUsuarios extends AbstractTableModel {
         this.lista = lista;
     }
     
-    public Object getBean(int rowIndex) {
-        return lista.get(rowIndex);
+    public ApcUsuarios getBean(int rowIndex) {
+        return (ApcUsuarios) lista.get(rowIndex);
     }
     
     @Override

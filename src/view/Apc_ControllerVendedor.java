@@ -20,8 +20,8 @@ public class Apc_ControllerVendedor extends AbstractTableModel {
         this.lista = lista;
     }
     
-    public Object getBean(int rowIndex) {
-        return lista.get(rowIndex);
+    public ApcVendedor getBean(int rowIndex) {
+        return (ApcVendedor) lista.get(rowIndex);
     }
     
     @Override

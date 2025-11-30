@@ -7,6 +7,7 @@ package view;
 import bean.ApcVendedor;
 import dao.DAO_ApcVendedor;
 import java.util.List;
+import tools.Util;
 
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class JDlgApc_VendedorPesquisar extends javax.swing.JDialog {
 
-    JDlgApc_Vendedor jDlgApc_Vendedor;
+    private JDlgApc_Vendedor jDlgApc_Vendedor;
     Apc_ControllerVendedor apc_controllerVendedor;
 
     /**
@@ -66,6 +67,11 @@ public class JDlgApc_VendedorPesquisar extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBtnOk.setText("Ok");
@@ -103,11 +109,21 @@ public class JDlgApc_VendedorPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        int linSel = jTable1.getSelectedRow();
-        ApcVendedor apcvendedor = (ApcVendedor) apc_controllerVendedor.getBean(linSel);
-        jDlgApc_Vendedor.beanView(apcvendedor);
-        setVisible(false);
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            ApcVendedor vendedor = apc_controllerVendedor.getBean(jTable1.getSelectedRow());
+            jDlgApc_Vendedor.beanView(vendedor);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            jBtnOkActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
