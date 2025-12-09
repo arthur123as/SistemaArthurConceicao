@@ -6,6 +6,8 @@
 package dao;
 import bean.ApcClientes;
 import bean.ApcVendas;
+import bean.ApcVendedor;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -49,6 +51,75 @@ public class DAO_ApcVendas extends DAO_Abstract{
         criteria.add(Restrictions.eq("apc_idPedidos", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();    
+        return lista;
+    }
+    
+    public Object listClientes(ApcClientes cliente) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendas.class);
+        criteria.add(Restrictions.like("apcClientes", "%" + cliente + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+        
+    public Object listVendedor(ApcVendedor vendedor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendas.class);
+        criteria.add(Restrictions.ge("apcVendedor", vendedor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listPeriodo(Date dataInicio, Date dataFim) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendas.class);
+        criteria.add(Restrictions.between("apcDataPedido", dataInicio, dataFim));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listClientesVendedor(ApcClientes cliente, ApcVendedor vendedor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendas.class);
+        criteria.add(Restrictions.like("apcClientes", "%" + cliente + "%"));
+        criteria.add(Restrictions.like("apcVendedor", "%" + vendedor + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listClientesPeriodo(ApcClientes cliente, Date dataInicio, Date dataFim) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendas.class);
+        criteria.add(Restrictions.eq("apcClientes", cliente));
+        criteria.add(Restrictions.between("apcDataPedido", dataInicio, dataFim));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listVendedorPeriodo(ApcVendedor vendedor, Date dataInicio, Date dataFim) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendas.class);
+        criteria.add(Restrictions.eq("apcVendedor", vendedor));
+        criteria.add(Restrictions.between("apcDataPedido", dataInicio, dataFim));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+
+    public Object listClienteVendedorPeriodo(ApcClientes cliente, ApcVendedor vendedor, Date dataInicio, Date dataFim) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendas.class);
+        criteria.add(Restrictions.eq("apcClientes", cliente));
+        criteria.add(Restrictions.eq("apcVendedor", vendedor));
+        criteria.add(Restrictions.between("apcDataPedido", dataInicio, dataFim));
+        List lista = criteria.list();
+        session.getTransaction().commit();
         return lista;
     }
 

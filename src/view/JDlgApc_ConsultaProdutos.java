@@ -4,9 +4,7 @@
  */
 package view;
 
-import bean.ApcUsuarios;
 import dao.DAO_ApcProdutos;
-import dao.DAO_ApcUsuarios;
 import java.util.List;
 import tools.Util;
 
