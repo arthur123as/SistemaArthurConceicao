@@ -44,12 +44,40 @@ public class DAO_ApcProdutos extends DAO_Abstract{
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ApcProdutos.class);
-        criteria.add(Restrictions.eq("apc_idUsuarios", codigo));
+        criteria.add(Restrictions.eq("apc_idProdutos", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();    
         return lista;
     }
-
+    
+    public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcProdutos.class);
+        criteria.add(Restrictions.like("apcNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+        
+    public Object listValor(double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcProdutos.class);
+        criteria.add(Restrictions.ge("apcPreco", valor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listNomeValor(String nome, double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcProdutos.class);
+        criteria.add(Restrictions.like("apcNome", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("apcPreco", valor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
     @Override
     public List listAll() {
         session.beginTransaction();

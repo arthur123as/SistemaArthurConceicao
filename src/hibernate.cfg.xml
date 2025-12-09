@@ -41,9 +41,10 @@ Contributor(s):
 -->
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_arthur_conceicao?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_arthur_conceicao?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">arthur_conceicao</property>
+    <property name="hibernate.connection.password">arthur_conceicao</property>
     <mapping class="bean.ApcVendedor"/>
     <mapping class="bean.ApcVendasProdutos"/>
     <mapping class="bean.ApcVendas"/>
