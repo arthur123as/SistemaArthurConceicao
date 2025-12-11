@@ -35,15 +35,15 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jCboCliente" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCboVendedor" min="-2" pref="132" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtCliente" min="-2" pref="129" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtVendedor" min="-2" pref="124" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jFmtApc_DataInicio" min="-2" pref="80" max="-2" attributes="0"/>
@@ -79,8 +79,8 @@
                           <Component id="jFmtApc_DataInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jFmtApc_DataFim" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCboCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCboVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jBtnConsulta" min="-2" max="-2" attributes="0"/>
@@ -177,25 +177,9 @@
         <Property name="text" type="java.lang.String" value="a"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jCboCliente">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ApcClientes&gt;"/>
-      </AuxValues>
+    <Component class="javax.swing.JTextField" name="jTxtCliente">
     </Component>
-    <Component class="javax.swing.JComboBox" name="jCboVendedor">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ApcVendedor&gt;"/>
-      </AuxValues>
+    <Component class="javax.swing.JTextField" name="jTxtVendedor">
     </Component>
   </SubComponents>
 </Form>

@@ -54,7 +54,7 @@ public class DAO_ApcVendas extends DAO_Abstract{
         return lista;
     }
     
-    public Object listClientes(ApcClientes cliente) {
+    public Object listClientes(String cliente) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ApcVendas.class);
         criteria.add(Restrictions.like("apcClientes", "%" + cliente + "%"));
@@ -63,7 +63,7 @@ public class DAO_ApcVendas extends DAO_Abstract{
         return lista;
     }
         
-    public Object listVendedor(ApcVendedor vendedor) {
+    public Object listVendedor(String vendedor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ApcVendas.class);
         criteria.add(Restrictions.ge("apcVendedor", vendedor));
@@ -81,7 +81,7 @@ public class DAO_ApcVendas extends DAO_Abstract{
         return lista;
     }
     
-    public Object listClientesVendedor(ApcClientes cliente, ApcVendedor vendedor) {
+    public Object listClientesVendedor(String cliente, String vendedor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ApcVendas.class);
         criteria.add(Restrictions.like("apcClientes", "%" + cliente + "%"));
@@ -91,7 +91,7 @@ public class DAO_ApcVendas extends DAO_Abstract{
         return lista;
     }
     
-    public Object listClientesPeriodo(ApcClientes cliente, Date dataInicio, Date dataFim) {
+    public Object listClientesPeriodo(String cliente, Date dataInicio, Date dataFim) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ApcVendas.class);
         criteria.add(Restrictions.eq("apcClientes", cliente));
@@ -101,7 +101,7 @@ public class DAO_ApcVendas extends DAO_Abstract{
         return lista;
     }
     
-    public Object listVendedorPeriodo(ApcVendedor vendedor, Date dataInicio, Date dataFim) {
+    public Object listVendedorPeriodo(String vendedor, Date dataInicio, Date dataFim) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ApcVendas.class);
         criteria.add(Restrictions.eq("apcVendedor", vendedor));
@@ -112,7 +112,7 @@ public class DAO_ApcVendas extends DAO_Abstract{
     }
 
 
-    public Object listClienteVendedorPeriodo(ApcClientes cliente, ApcVendedor vendedor, Date dataInicio, Date dataFim) {
+    public Object listClienteVendedorPeriodo(String cliente, String vendedor, Date dataInicio, Date dataFim) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ApcVendas.class);
         criteria.add(Restrictions.eq("apcClientes", cliente));

@@ -30,19 +30,7 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consulta Vendas");
-        
-        DAO_ApcClientes clientesDAO = new DAO_ApcClientes();
-        List listaClientes = (List) clientesDAO.listAll();
-        for (int i = 0; i < listaClientes.size(); i++) {
-            jCboCliente.addItem((ApcClientes) listaClientes.get(i));
-        }
-        
-        DAO_ApcVendedor vendedorDAO = new DAO_ApcVendedor();
-        List listaVendedor = (List) vendedorDAO.listAll();
-        for (int i = 0; i < listaVendedor.size(); i++) {
-            jCboVendedor.addItem((ApcVendedor) listaVendedor.get(i));
-        }
-        
+              
         apc_ControllerConsultasVendas = new Apc_ControllerConsultasVendas();
         apcVendasDAO = new DAO_ApcVendas();
         List lista = (List) apcVendasDAO.listAll();
@@ -70,8 +58,8 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
         jFmtApc_DataInicio = new javax.swing.JFormattedTextField();
         jFmtApc_DataFim = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
-        jCboCliente = new javax.swing.JComboBox<>();
-        jCboVendedor = new javax.swing.JComboBox<>();
+        jTxtCliente = new javax.swing.JTextField();
+        jTxtVendedor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -144,13 +132,13 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
                         .addComponent(jBtnOk))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel1)
+                            .addComponent(jTxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jCboVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jTxtVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jFmtApc_DataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,8 +167,8 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
                             .addComponent(jFmtApc_DataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFmtApc_DataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jCboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCboVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jBtnConsulta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,8 +198,8 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
         Date dataInicio = Util.strToDate(jFmtApc_DataInicio.getText());
         Date dataFim = Util.strToDate(jFmtApc_DataFim.getText());
 
-        ApcClientes cliente = (ApcClientes) jCboCliente.getSelectedItem();
-        ApcVendedor vendedor = (ApcVendedor) jCboVendedor.getSelectedItem();
+        String cliente = jTxtCliente.getText();
+        String vendedor = jTxtVendedor.getText();
 
         if (cliente != null && vendedor != null && dataInicio != null && dataFim != null) {
             
@@ -311,8 +299,6 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
     private javax.swing.JButton jBtnConsulta;
     private javax.swing.JButton jBtnOk;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<ApcClientes> jCboCliente;
-    private javax.swing.JComboBox<ApcVendedor> jCboVendedor;
     private javax.swing.JFormattedTextField jFmtApc_DataFim;
     private javax.swing.JFormattedTextField jFmtApc_DataInicio;
     private javax.swing.JLabel jLabel1;
@@ -321,5 +307,7 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTxtCliente;
+    private javax.swing.JTextField jTxtVendedor;
     // End of variables declaration//GEN-END:variables
 }
