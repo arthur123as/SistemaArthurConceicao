@@ -66,7 +66,7 @@ public class ApcVendas  implements java.io.Serializable {
         this.apcIdPedidos = apcIdPedidos;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="apc_idClientes", nullable=false)
     public ApcClientes getApcClientes() {
         return this.apcClientes;
@@ -76,7 +76,7 @@ public class ApcVendas  implements java.io.Serializable {
         this.apcClientes = apcClientes;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="apc_idVendedor", nullable=false)
     public ApcVendedor getApcVendedor() {
         return this.apcVendedor;

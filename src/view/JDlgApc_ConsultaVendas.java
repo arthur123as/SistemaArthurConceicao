@@ -201,17 +201,17 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
         String cliente = jTxtCliente.getText();
         String vendedor = jTxtVendedor.getText();
 
-        if (cliente != null && vendedor != null && dataInicio != null && dataFim != null) {
+        if (!cliente.isEmpty() && !vendedor.isEmpty() && dataInicio != null && dataFim != null) {
             
             List listaClienteVendedorPeriodo = (List) apcVendasDAO.listClienteVendedorPeriodo(cliente, vendedor, dataInicio, dataFim);
             apc_ControllerConsultasVendas.setList(listaClienteVendedorPeriodo);
             
-        } else if (cliente != null && dataInicio != null && dataFim != null) {
+        } else if (!cliente.isEmpty() && dataInicio != null && dataFim != null) {
             
             List listaClientePeriodo = (List) apcVendasDAO.listClientesPeriodo(cliente, dataInicio, dataFim);
             apc_ControllerConsultasVendas.setList(listaClientePeriodo);
             
-        } else if (vendedor != null && dataInicio != null && dataFim != null) {
+        } else if (!vendedor.isEmpty() && dataInicio != null && dataFim != null) {
             
             List listaVendedorPeriodo = (List) apcVendasDAO.listVendedorPeriodo(vendedor, dataInicio, dataFim);
             apc_ControllerConsultasVendas.setList(listaVendedorPeriodo);
@@ -221,12 +221,12 @@ public class JDlgApc_ConsultaVendas extends javax.swing.JDialog {
             List listaPeriodo = (List) apcVendasDAO.listPeriodo(dataInicio, dataFim);
             apc_ControllerConsultasVendas.setList(listaPeriodo);
             
-        } else if (cliente != null) {
+        } else if (!cliente.isEmpty()) {
             
             List listaCliente = (List) apcVendasDAO.listClientes(cliente);
             apc_ControllerConsultasVendas.setList(listaCliente);
             
-        } else if (vendedor != null) {
+        } else if (!vendedor.isEmpty()) {
             
             List listaVendedor = (List) apcVendasDAO.listVendedor(vendedor);
             apc_ControllerConsultasVendas.setList(listaVendedor);

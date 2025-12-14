@@ -16,6 +16,8 @@ import dao.DAO_ApcVendedor;
 import java.util.ArrayList;
 import tools.Util;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -77,6 +79,11 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
         DAO_ApcVendasProdutos vendasProdutosDAO = new DAO_ApcVendasProdutos();
         List lista = (List) vendasProdutosDAO.listProdutos(vendas);
         apc_ControllerVendasProdutos.setList(lista);
+
+    }
+    
+    public JTable getjTable1() {
+        return jTable2;
     }
     
 /**    public void atualizarTotal() {
@@ -385,7 +392,6 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
             Util.habilitar(true, jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jFmtApc_Total,
                     jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
             Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-            apc_ControllerVendasProdutos.setList(new ArrayList());
         }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -398,13 +404,14 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
             if (Util.perguntar("Deseja realmente Excluir?") == true) {
                 DAO_ApcVendas vendasDAO = new DAO_ApcVendas();
                 DAO_ApcVendasProdutos vendasProdutosDAO = new DAO_ApcVendasProdutos();
-                
-                for (int ind = 0; ind < jTable2.getRowCount(); ind++) {
-                    ApcVendasProdutos vendasProdutos =  apc_ControllerVendasProdutos.getBean(ind);
-                    vendasProdutosDAO.delete(vendasProdutos);
-                }
-                
-                vendasDAO.delete(viewBean());
+
+                ApcVendas venda = viewBean();
+
+                vendasProdutosDAO.deleteProdutos(venda);
+
+                vendasDAO.delete(venda);
+
+                Util.mensagem("Venda excluída com sucesso!");
             }
         }
         Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jFmtApc_Total);
@@ -466,15 +473,37 @@ public class JDlgApc_Vendas extends javax.swing.JDialog {
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
         // TODO add your handling code here:
-        JDlgApc_VendasProdutos jDlgVendasProdutos = new JDlgApc_VendasProdutos(null, true);
-        jDlgVendasProdutos.setVisible(true);
+        int linha = jTable2.getSelectedRow();
+
+        if (linha < 0) {
+            Util.mensagem("Selecione um produto para alterar.");
+            return;
+        }
+
+        ApcVendasProdutos produto =
+            apc_ControllerVendasProdutos.getBean(linha);
+
+        JDlgApc_VendasProdutos dlg =
+            new JDlgApc_VendasProdutos(this, true);
+
+        dlg.setTelaAnterior(this);
+        dlg.setProduto(produto); // 👈 ESSENCIAL
+        dlg.alterar();
+        dlg.setVisible(true);
+
+        atualizarTotal();
+
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
-        // TODO add your handling code here:
-        JDlgApc_VendasProdutos jDlgVendasProdutos = new JDlgApc_VendasProdutos(null, true);
-        jDlgVendasProdutos.setTelaAnterior(this);
-        jDlgVendasProdutos.setVisible(true);
+        
+        JDlgApc_VendasProdutos dlg =
+            new JDlgApc_VendasProdutos(this, true);
+
+        dlg.setTelaAnterior(this);
+        dlg.incluir();             
+        dlg.setVisible(true);
+
         atualizarTotal();
 
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed

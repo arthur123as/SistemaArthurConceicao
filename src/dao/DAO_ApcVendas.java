@@ -56,8 +56,8 @@ public class DAO_ApcVendas extends DAO_Abstract{
     
     public Object listClientes(String cliente) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(ApcVendas.class);
-        criteria.add(Restrictions.like("apcClientes", "%" + cliente + "%"));
+        Criteria criteria = session.createCriteria(ApcVendas.class).createAlias("apcClientes", "cliente"); 
+        criteria.add(Restrictions.like("cliente.apcNome", "%" + cliente + "%"));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -65,8 +65,8 @@ public class DAO_ApcVendas extends DAO_Abstract{
         
     public Object listVendedor(String vendedor) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(ApcVendas.class);
-        criteria.add(Restrictions.ge("apcVendedor", vendedor));
+        Criteria criteria = session.createCriteria(ApcVendas.class).createAlias("apcVendedor", "vendedor"); 
+        criteria.add(Restrictions.like("vendedor.apcNome", "%" + vendedor + "%"));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -83,9 +83,9 @@ public class DAO_ApcVendas extends DAO_Abstract{
     
     public Object listClientesVendedor(String cliente, String vendedor) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(ApcVendas.class);
-        criteria.add(Restrictions.like("apcClientes", "%" + cliente + "%"));
-        criteria.add(Restrictions.like("apcVendedor", "%" + vendedor + "%"));
+        Criteria criteria = session.createCriteria(ApcVendas.class).createAlias("apcClientes", "cliente").createAlias("apcVendedor", "vendedor"); 
+        criteria.add(Restrictions.like("cliente.apcNome", "%" + cliente + "%"));
+        criteria.add(Restrictions.like("vendedor.apcNome", "%" + vendedor + "%"));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -93,8 +93,8 @@ public class DAO_ApcVendas extends DAO_Abstract{
     
     public Object listClientesPeriodo(String cliente, Date dataInicio, Date dataFim) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(ApcVendas.class);
-        criteria.add(Restrictions.eq("apcClientes", cliente));
+        Criteria criteria = session.createCriteria(ApcVendas.class).createAlias("apcClientes", "cliente"); 
+        criteria.add(Restrictions.like("cliente.apcNome", "%" + cliente + "%"));
         criteria.add(Restrictions.between("apcDataPedido", dataInicio, dataFim));
         List lista = criteria.list();
         session.getTransaction().commit();
@@ -103,8 +103,8 @@ public class DAO_ApcVendas extends DAO_Abstract{
     
     public Object listVendedorPeriodo(String vendedor, Date dataInicio, Date dataFim) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(ApcVendas.class);
-        criteria.add(Restrictions.eq("apcVendedor", vendedor));
+        Criteria criteria = session.createCriteria(ApcVendas.class).createAlias("apcVendedor", "vendedor"); 
+        criteria.add(Restrictions.like("vendedor.apcNome", "%" + vendedor + "%"));
         criteria.add(Restrictions.between("apcDataPedido", dataInicio, dataFim));
         List lista = criteria.list();
         session.getTransaction().commit();
@@ -114,9 +114,9 @@ public class DAO_ApcVendas extends DAO_Abstract{
 
     public Object listClienteVendedorPeriodo(String cliente, String vendedor, Date dataInicio, Date dataFim) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(ApcVendas.class);
-        criteria.add(Restrictions.eq("apcClientes", cliente));
-        criteria.add(Restrictions.eq("apcVendedor", vendedor));
+        Criteria criteria = session.createCriteria(ApcVendas.class).createAlias("apcClientes", "cliente").createAlias("apcVendedor", "vendedor"); 
+        criteria.add(Restrictions.like("cliente.apcNome", "%" + cliente + "%"));
+        criteria.add(Restrictions.like("vendedor.apcNome", "%" + vendedor + "%"));
         criteria.add(Restrictions.between("apcDataPedido", dataInicio, dataFim));
         List lista = criteria.list();
         session.getTransaction().commit();

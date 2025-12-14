@@ -5,6 +5,7 @@
 package view;
 
 import dao.DAO_ApcProdutos;
+import dao.DAO_ApcVendedor;
 import java.util.List;
 import tools.Util;
 
@@ -17,19 +18,19 @@ public class JDlgApc_ConsultaVendedor extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
-    Apc_ControllerConsultasProdutos apc_controllerConsultasProdutos;
-    DAO_ApcProdutos apcProdutosDAO;
+    Apc_ControllerConsultasVendedor apc_controllerConsultasVendedor;
+    DAO_ApcVendedor apcVendedorDAO;
 
     public JDlgApc_ConsultaVendedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Consulta Produtos");
-        apc_controllerConsultasProdutos = new Apc_ControllerConsultasProdutos();
-        apcProdutosDAO = new DAO_ApcProdutos();
-        List lista = (List) apcProdutosDAO.listAll();
-        apc_controllerConsultasProdutos.setList(lista);
-        jTable1.setModel(apc_controllerConsultasProdutos);
+        setTitle("Consulta Vendedor");
+        apc_controllerConsultasVendedor = new Apc_ControllerConsultasVendedor();
+        apcVendedorDAO = new DAO_ApcVendedor();
+        List lista = (List) apcVendedorDAO.listAll();
+        apc_controllerConsultasVendedor.setList(lista);
+        jTable1.setModel(apc_controllerConsultasVendedor);
     }
 
     /**
@@ -78,9 +79,9 @@ public class JDlgApc_ConsultaVendedor extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Nome:");
 
-        jLabel2.setText("Valor Maior que ");
+        jLabel2.setText("Salário maior ou igual a:");
 
         jBtnConsulta.setText("Consultar");
         jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -160,27 +161,27 @@ public class JDlgApc_ConsultaVendedor extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (!jTxtValor.getText().isEmpty() && !jTxtNome.getText().isEmpty()) {
             String nome = jTxtNome.getText();
-            double valor = Util.strToDouble(jTxtValor.getText());
+            double salario = Util.strToDouble(jTxtValor.getText());
             
-            List listaNomeValor = (List) apcProdutosDAO.listNomeValor(nome, valor);
-            apc_controllerConsultasProdutos.setList(listaNomeValor);
+            List listaNomeSalario = (List) apcVendedorDAO.listNomeSalario(nome, salario);
+            apc_controllerConsultasVendedor.setList(listaNomeSalario);
             
         } else if (!jTxtNome.getText().isEmpty()) {
             String nome = jTxtNome.getText();
             
-            List listaNome = (List) apcProdutosDAO.listNome(nome);
-            apc_controllerConsultasProdutos.setList(listaNome);
+            List listaNome = (List) apcVendedorDAO.listNome(nome);
+            apc_controllerConsultasVendedor.setList(listaNome);
             
         } else if (!jTxtValor.getText().isEmpty()){
-            double valor = Util.strToDouble(jTxtValor.getText());
+            double salario = Util.strToDouble(jTxtValor.getText());
             
-            List listaValor = (List) apcProdutosDAO.listValor(valor);
-            apc_controllerConsultasProdutos.setList(listaValor);
+            List listaSalario = (List) apcVendedorDAO.listSalario(salario);
+            apc_controllerConsultasVendedor.setList(listaSalario);
             
         } else {
             
-            List lista = (List) apcProdutosDAO.listAll();
-            apc_controllerConsultasProdutos.setList(lista);
+            List lista = (List) apcVendedorDAO.listAll();
+            apc_controllerConsultasVendedor.setList(lista);
         }
         
     }//GEN-LAST:event_jBtnConsultaActionPerformed

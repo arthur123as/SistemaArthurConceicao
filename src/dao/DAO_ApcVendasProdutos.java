@@ -39,7 +39,19 @@ public class DAO_ApcVendasProdutos extends DAO_Abstract{
         session.flush();
         session.clear();
         session.delete(objeto);
-        session.getTransaction().commit();    }
+        session.getTransaction().commit();    
+    }
+    
+    public void deleteProdutos(ApcVendas vendas) {
+        List lista = (List) listProdutos(vendas);
+        session.beginTransaction();
+        for (int i = 0; i < lista.size(); i++) {
+            ApcVendasProdutos vendasProdutos = (ApcVendasProdutos) lista.get(i);
+            session.flush();
+            session.clear();
+            session.delete(vendasProdutos);
+        }
+    }
 
     @Override
     public Object list(int codigo) {

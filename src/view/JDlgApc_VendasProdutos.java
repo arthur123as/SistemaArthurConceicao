@@ -16,12 +16,28 @@ import tools.Util;
  */
 public class JDlgApc_VendasProdutos extends javax.swing.JDialog {
     JDlgApc_Vendas jDlgApc_Vendas;
+    private ApcVendasProdutos produto;
+    boolean incluir;
+    
+    public void incluir() {
+        incluir = true;
+    }
+
+    public void alterar() {
+        incluir = false;
+    }
+    
+    public void setProduto(ApcVendasProdutos produto) {
+        this.produto = produto;
+        beanView(produto);
+    }
+
 
     /**
      * Creates new form JDlgPedidosProdutos
      */
-    public JDlgApc_VendasProdutos(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public JDlgApc_VendasProdutos(java.awt.Window parent, boolean modal) {
+        super(parent, ModalityType.APPLICATION_MODAL);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("VendasProdutos");
@@ -37,6 +53,16 @@ public class JDlgApc_VendasProdutos extends javax.swing.JDialog {
     public void setTelaAnterior(JDlgApc_Vendas jDlgApc_Vendas) {
         this.jDlgApc_Vendas = jDlgApc_Vendas;
     }
+    public void beanView(ApcVendasProdutos vp) {
+        jCboApc_Produtos.setSelectedItem(vp.getApcProdutos());
+        jTxtApc_Qtd.setText(Util.intToStr(vp.getApcQuantidade()));
+        jTxtApc_ValorUnit.setText(Util.doubleToStr(vp.getApcPrecoUnitario()));
+        jTxtApc_Total.setText(
+            Util.doubleToStr(vp.getApcQuantidade() * vp.getApcPrecoUnitario())
+        );
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -159,11 +185,18 @@ public class JDlgApc_VendasProdutos extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        ApcVendasProdutos vendasProdutos = new ApcVendasProdutos();
-        vendasProdutos.setApcProdutos((ApcProdutos) jCboApc_Produtos.getSelectedItem());
-        vendasProdutos.setApcQuantidade(Util.strToInt(jTxtApc_Qtd.getText()) );
-        vendasProdutos.setApcPrecoUnitario(Util.strToDouble(jTxtApc_ValorUnit.getText()) );                
-        jDlgApc_Vendas.apc_ControllerVendasProdutos.addBean(vendasProdutos);
+        if (incluir) {
+            produto = new ApcVendasProdutos();
+        }
+
+        produto.setApcProdutos((ApcProdutos) jCboApc_Produtos.getSelectedItem());
+        produto.setApcQuantidade(Util.strToInt(jTxtApc_Qtd.getText()));
+        produto.setApcPrecoUnitario(Util.strToDouble(jTxtApc_ValorUnit.getText()));
+
+        if (incluir) {
+            jDlgApc_Vendas.apc_ControllerVendasProdutos.addBean(produto);
+        }
+
         setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 

@@ -65,13 +65,12 @@ public class Apc_ControllerVendasProdutos extends AbstractTableModel {
     }
     
     @Override
-    public String getColumnName (int column) {
-        if (column == 0) return "Nº do Pedido";
-        if (column == 1) return "Data do Pedido";
-        if (column == 2) return "Total";
-        if (column == 3) return "Total";
-        if (column == 4) return "Total";
-        
-        return "";
+    public String getColumnName (int columnIndex) {
+       if (columnIndex == 0) return "Código";
+       if (columnIndex == 1) return "Produto";
+       if (columnIndex == 2) return "Quantidade";
+       if (columnIndex == 3) return "Valor Unitário";
+       if (columnIndex == 4) return "Total";
+       return "";
     }
 }

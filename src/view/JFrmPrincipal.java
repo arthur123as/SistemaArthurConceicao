@@ -317,14 +317,14 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMnuConsultaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaClientesActionPerformed
         // TODO add your handling code here:
-//        JDlgApc_ConsultaClientes jDlgApc_ConsultaClientes = new JDlgApc_ConsultaClientes(this, true);
-//        jDlgApc_ConsultaClientes.setVisible(true);
+        JDlgApc_ConsultaClientes jDlgApc_ConsultaClientes = new JDlgApc_ConsultaClientes(this, true);
+        jDlgApc_ConsultaClientes.setVisible(true);
     }//GEN-LAST:event_jMnuConsultaClientesActionPerformed
 
     private void jMnuConsultaVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaVendedoresActionPerformed
         // TODO add your handling code here:
-//         JDlgApc_ConsultaProdutos jDlgApc_ConsultaProdutos = new JDlgApc_ConsultaProdutos(this, true);;;
-//        jDlgApc_ConsultaProdutos.setVisible(true);
+        JDlgApc_ConsultaVendedor jDlgApc_ConsultaVendedor = new JDlgApc_ConsultaVendedor(this, true);;;
+        jDlgApc_ConsultaVendedor.setVisible(true);
     }//GEN-LAST:event_jMnuConsultaVendedoresActionPerformed
 
     private void jBtnVendasTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVendasTBActionPerformed

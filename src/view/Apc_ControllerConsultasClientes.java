@@ -4,7 +4,7 @@
  */
 package view;
 
-import bean.ApcProdutos;
+import bean.ApcClientes;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,46 +15,57 @@ import javax.swing.table.AbstractTableModel;
  */
 public class Apc_ControllerConsultasClientes extends AbstractTableModel {
 
-    private List lstProdutos;
+    private List lstClientes;
 
-    public void setList(List lstProdutos) {
-        this.lstProdutos = lstProdutos;
+    public void setList(List lstClientes) {
+        this.lstClientes = lstClientes;
         this.fireTableDataChanged();
     }
 
     @Override
     public int getRowCount() {
-        return lstProdutos.size();
+        return lstClientes.size();
                 
     }
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 5;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ApcProdutos produtos = (ApcProdutos) lstProdutos.get( rowIndex);
-        if ( columnIndex == 0 ){
-            return produtos.getApcIdProdutos();
-        } else if (columnIndex ==1) {
-            return produtos.getApcNome();        
-        } else if (columnIndex ==2) {
-            return produtos.getApcPreco();
+        ApcClientes apc_clientes = (ApcClientes) lstClientes.get( rowIndex);
+        if (columnIndex == 0) {
+            return apc_clientes.getApcIdClientes();
         } 
+        
+        if (columnIndex == 1) {
+            return apc_clientes.getApcNome();
+        } 
+        
+        if (columnIndex == 2) {
+            return apc_clientes.getApcCpf();
+        }
+        
+        if (columnIndex == 3) {
+            return apc_clientes.getApcDataCadastro();
+        }
+        
+        if (columnIndex == 4) {
+            return apc_clientes.getApcAtivo();
+        }
         return "";
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-        if ( columnIndex == 0) {
-            return "Código";
-        } else if ( columnIndex == 1) {
-            return "Nome";         
-        } else if ( columnIndex == 2) {
-            return "Valor Unitário";
-        }
+        if (columnIndex == 0) return "Código";
+        if (columnIndex == 1) return "Nome";
+        if (columnIndex == 2) return "Cpf";
+        if (columnIndex == 3) return "Data de Cadastro";
+        if (columnIndex == 4) return "Ativo";
+        
         return "";
     }
 }

@@ -36,18 +36,22 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTxtNome" min="-2" pref="261" max="-2" attributes="0"/>
+                          <Component id="jTxtNome" min="-2" pref="182" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTxtValor" min="-2" pref="261" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jBtnConsulta" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jFmtCPF" min="-2" pref="211" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jChbAtivo" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                      <EmptySpace pref="96" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jBtnConsulta" min="-2" max="-2" attributes="0"/>
+                          <Component id="jChbTodos" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -57,23 +61,24 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTxtNome" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jChbTodos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTxtValor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBtnConsulta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFmtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jChbAtivo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="jBtnConsulta" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="254" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -125,11 +130,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtNome">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtValor">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Valor Maior que "/>
+        <Property name="text" type="java.lang.String" value="CPF"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnConsulta">
@@ -144,6 +147,24 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Imprimir"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jChbAtivo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ativo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jChbAtivoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFmtCPF">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jChbTodos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Todos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jChbTodosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

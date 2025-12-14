@@ -49,6 +49,74 @@ public class DAO_ApcClientes extends DAO_Abstract{
         session.getTransaction().commit();    
         return lista;
     }
+    
+    public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcClientes.class);
+        criteria.add(Restrictions.like("apcNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
+    
+    public Object listCpf(String cpf) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcClientes.class);
+        criteria.add(Restrictions.eq("apcCpf", cpf));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
+    
+    public Object listAtivo(String ativo) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcClientes.class);
+        criteria.add(Restrictions.eq("apcAtivo", ativo));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
+    
+    public Object listNomeCpf(String nome, String cpf) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcClientes.class);
+        criteria.add(Restrictions.like("apcNome", "%" + nome + "%"));
+        criteria.add(Restrictions.eq("apcCpf", cpf));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
+    
+    public Object listNomeAtivo(String nome, String ativo) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcClientes.class);
+        criteria.add(Restrictions.like("apcNome", "%" + nome + "%"));
+        criteria.add(Restrictions.eq("apcAtivo", ativo));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
+    
+    public Object listCpfAtivo(String cpf, String ativo) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcClientes.class);
+        criteria.add(Restrictions.eq("apcCpf", cpf));
+        criteria.add(Restrictions.eq("apcAtivo", ativo));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
+    
+    public Object listNomeCpfAtivo(String nome, String cpf, String ativo) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcClientes.class);
+        criteria.add(Restrictions.like("apcNome", "%" + nome + "%"));
+        criteria.add(Restrictions.eq("apcAtivo", ativo));
+        criteria.add(Restrictions.eq("apcCpf", cpf));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
 
     @Override
     public List listAll() {

@@ -49,6 +49,34 @@ public class DAO_ApcVendedor extends DAO_Abstract{
         session.getTransaction().commit();    
         return lista;
     }
+    
+    public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendedor.class);
+        criteria.add(Restrictions.like("apcNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
+    
+    public Object listSalario(double salario) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendedor.class);
+        criteria.add(Restrictions.ge("apcSalario", salario));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
+    
+        public Object listNomeSalario(String nome, double salario) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ApcVendedor.class);
+        criteria.add(Restrictions.like("apcNome", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("apcSalario", salario));
+        List lista = criteria.list();
+        session.getTransaction().commit();    
+        return lista;
+    }
 
     @Override
     public List listAll() {

@@ -4,6 +4,7 @@
  */
 package view;
 
+import dao.DAO_ApcClientes;
 import dao.DAO_ApcProdutos;
 import java.util.List;
 import tools.Util;
@@ -17,19 +18,19 @@ public class JDlgApc_ConsultaClientes extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
-    Apc_ControllerConsultasProdutos apc_controllerConsultasProdutos;
-    DAO_ApcProdutos apcProdutosDAO;
+    Apc_ControllerConsultasClientes apc_ControllerConsultasClientes;
+    DAO_ApcClientes apcClientesDAO;
 
     public JDlgApc_ConsultaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Consulta Produtos");
-        apc_controllerConsultasProdutos = new Apc_ControllerConsultasProdutos();
-        apcProdutosDAO = new DAO_ApcProdutos();
-        List lista = (List) apcProdutosDAO.listAll();
-        apc_controllerConsultasProdutos.setList(lista);
-        jTable1.setModel(apc_controllerConsultasProdutos);
+        setTitle("Consulta Clientes");
+        apc_ControllerConsultasClientes = new Apc_ControllerConsultasClientes();
+        apcClientesDAO = new DAO_ApcClientes();
+        List lista = (List) apcClientesDAO.listAll();
+        apc_ControllerConsultasClientes.setList(lista);
+        jTable1.setModel(apc_ControllerConsultasClientes);
     }
 
     /**
@@ -46,10 +47,12 @@ public class JDlgApc_ConsultaClientes extends javax.swing.JDialog {
         jBtnOk = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTxtNome = new javax.swing.JTextField();
-        jTxtValor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jBtnConsulta = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jChbAtivo = new javax.swing.JCheckBox();
+        jFmtCPF = new javax.swing.JFormattedTextField();
+        jChbTodos = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,7 +83,7 @@ public class JDlgApc_ConsultaClientes extends javax.swing.JDialog {
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("Valor Maior que ");
+        jLabel2.setText("CPF");
 
         jBtnConsulta.setText("Consultar");
         jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +93,20 @@ public class JDlgApc_ConsultaClientes extends javax.swing.JDialog {
         });
 
         jButton1.setText("Imprimir");
+
+        jChbAtivo.setText("Ativo");
+        jChbAtivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChbAtivoActionPerformed(evt);
+            }
+        });
+
+        jChbTodos.setText("Todos");
+        jChbTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChbTodosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,33 +124,37 @@ public class JDlgApc_ConsultaClientes extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnConsulta)))
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                                .addComponent(jFmtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jChbAtivo))
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBtnConsulta)
+                            .addComponent(jChbTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jChbTodos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtnConsulta))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFmtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jChbAtivo)))
+                    .addComponent(jBtnConsulta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -158,32 +179,67 @@ public class JDlgApc_ConsultaClientes extends javax.swing.JDialog {
 
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
         // TODO add your handling code here:
-        if (!jTxtValor.getText().isEmpty() && !jTxtNome.getText().isEmpty()) {
-            String nome = jTxtNome.getText();
-            double valor = Util.strToDouble(jTxtValor.getText());
-            
-            List listaNomeValor = (List) apcProdutosDAO.listNomeValor(nome, valor);
-            apc_controllerConsultasProdutos.setList(listaNomeValor);
-            
-        } else if (!jTxtNome.getText().isEmpty()) {
-            String nome = jTxtNome.getText();
-            
-            List listaNome = (List) apcProdutosDAO.listNome(nome);
-            apc_controllerConsultasProdutos.setList(listaNome);
-            
-        } else if (!jTxtValor.getText().isEmpty()){
-            double valor = Util.strToDouble(jTxtValor.getText());
-            
-            List listaValor = (List) apcProdutosDAO.listValor(valor);
-            apc_controllerConsultasProdutos.setList(listaValor);
-            
+        String nome = jTxtNome.getText();
+        String cpf = jFmtCPF.getText();
+        String ativo;
+        
+        if (jChbAtivo.isSelected() == true) {
+            ativo = "S";
         } else {
-            
-            List lista = (List) apcProdutosDAO.listAll();
-            apc_controllerConsultasProdutos.setList(lista);
+            ativo = "N";
         }
+                    
+        if (!nome.isEmpty() && !cpf.isEmpty() && "S".equals(ativo)) {
+                       
+            List listaNomeCpfAtivo = (List) apcClientesDAO.listNomeCpfAtivo(nome, cpf, "S");
+            apc_ControllerConsultasClientes.setList(listaNomeCpfAtivo);
+            
+        } else if (!nome.isEmpty() && !cpf.isEmpty()) {
+            
+            List listaNomeCpf = (List) apcClientesDAO.listNomeCpf(nome, cpf);
+            apc_ControllerConsultasClientes.setList(listaNomeCpf);
+            
+        } else if (!cpf.isEmpty() && "S".equals(ativo)){
+            
+            List listaCpfAtivo = (List) apcClientesDAO.listCpfAtivo(cpf, "S");
+            apc_ControllerConsultasClientes.setList(listaCpfAtivo);
+            
+        } else if ("S".equals(ativo)){
+            
+            List listaAtivo = (List) apcClientesDAO.listAtivo("S");
+            apc_ControllerConsultasClientes.setList(listaAtivo);
+            
+        } else if (!nome.isEmpty()){
+            
+            List listaNome = (List) apcClientesDAO.listNome(nome);
+            apc_ControllerConsultasClientes.setList(listaNome);
+            
+        } else if (!cpf.isEmpty()){
+            
+            List listaCpf = (List) apcClientesDAO.listCpf(cpf);
+            apc_ControllerConsultasClientes.setList(listaCpf);
+            
+        } else if (jChbTodos.isSelected() == true) {
+            
+            List lista = (List) apcClientesDAO.listAll();
+            apc_ControllerConsultasClientes.setList(lista);
+        }
+        else {
+            
+            List listaAtivo = (List) apcClientesDAO.listAtivo("N");
+            apc_ControllerConsultasClientes.setList(listaAtivo);
+            
+        } 
         
     }//GEN-LAST:event_jBtnConsultaActionPerformed
+
+    private void jChbAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChbAtivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jChbAtivoActionPerformed
+
+    private void jChbTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChbTodosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jChbTodosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,11 +302,13 @@ public class JDlgApc_ConsultaClientes extends javax.swing.JDialog {
     private javax.swing.JButton jBtnConsulta;
     private javax.swing.JButton jBtnOk;
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jChbAtivo;
+    private javax.swing.JCheckBox jChbTodos;
+    private javax.swing.JFormattedTextField jFmtCPF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTxtNome;
-    private javax.swing.JTextField jTxtValor;
     // End of variables declaration//GEN-END:variables
 }

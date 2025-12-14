@@ -4,7 +4,7 @@
  */
 package view;
 
-import bean.ApcProdutos;
+import bean.ApcVendedor;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,33 +15,35 @@ import javax.swing.table.AbstractTableModel;
  */
 public class Apc_ControllerConsultasVendedor extends AbstractTableModel {
 
-    private List lstProdutos;
+    private List lstVendedor;
 
-    public void setList(List lstProdutos) {
-        this.lstProdutos = lstProdutos;
+    public void setList(List lstVendedor) {
+        this.lstVendedor = lstVendedor;
         this.fireTableDataChanged();
     }
 
     @Override
     public int getRowCount() {
-        return lstProdutos.size();
+        return lstVendedor.size();
                 
     }
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ApcProdutos produtos = (ApcProdutos) lstProdutos.get( rowIndex);
+        ApcVendedor produtos = (ApcVendedor) lstVendedor.get( rowIndex);
         if ( columnIndex == 0 ){
-            return produtos.getApcIdProdutos();
+            return produtos.getApcIdVendedor();
         } else if (columnIndex ==1) {
             return produtos.getApcNome();        
         } else if (columnIndex ==2) {
-            return produtos.getApcPreco();
+            return produtos.getApcCargo();
+        } else if (columnIndex ==3) {
+            return produtos.getApcSalario();
         } 
         return "";
     }
@@ -53,7 +55,9 @@ public class Apc_ControllerConsultasVendedor extends AbstractTableModel {
         } else if ( columnIndex == 1) {
             return "Nome";         
         } else if ( columnIndex == 2) {
-            return "Valor Unitário";
+            return "Cargo";
+        } else if ( columnIndex == 3) {
+            return "Salario";
         }
         return "";
     }
